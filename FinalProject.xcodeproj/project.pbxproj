@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DC00A1A19140F3A004B0C64 /* ARLNoteData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC00A1919140F3A004B0C64 /* ARLNoteData.m */; };
 		9DE32DD219132F4600DBE246 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE32DD119132F4600DBE246 /* Foundation.framework */; };
 		9DE32DD419132F4600DBE246 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE32DD319132F4600DBE246 /* CoreGraphics.framework */; };
 		9DE32DD619132F4600DBE246 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE32DD519132F4600DBE246 /* UIKit.framework */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9DC00A1819140F3A004B0C64 /* ARLNoteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLNoteData.h; sourceTree = "<group>"; };
+		9DC00A1919140F3A004B0C64 /* ARLNoteData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLNoteData.m; sourceTree = "<group>"; };
 		9DE32DCE19132F4600DBE246 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE32DD119132F4600DBE246 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9DE32DD319132F4600DBE246 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,6 +129,8 @@
 				9DE32E0B1913416A00DBE246 /* ARLStringViewController.h */,
 				9DE32E0C1913416A00DBE246 /* ARLStringViewController.m */,
 				9DE32E0D1913416A00DBE246 /* ARLStringViewController.xib */,
+				9DC00A1819140F3A004B0C64 /* ARLNoteData.h */,
+				9DC00A1919140F3A004B0C64 /* ARLNoteData.m */,
 				9DE32E06191339BA00DBE246 /* ARLInputViewController.h */,
 				9DE32E07191339BA00DBE246 /* ARLInputViewController.m */,
 				9DE32E08191339BA00DBE246 /* ARLInputViewController.xib */,
@@ -264,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DE32DE219132F4600DBE246 /* ARLAppDelegate.m in Sources */,
+				9DC00A1A19140F3A004B0C64 /* ARLNoteData.m in Sources */,
 				9DE32E0E1913416A00DBE246 /* ARLStringViewController.m in Sources */,
 				9DE32E09191339BA00DBE246 /* ARLInputViewController.m in Sources */,
 				9DE32DDE19132F4600DBE246 /* main.m in Sources */,

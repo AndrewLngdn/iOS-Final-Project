@@ -8,6 +8,7 @@
 
 #import "ARLAppDelegate.h"
 #import "ARLTableViewController.h"
+#import "ARLNoteData.h"
 
 @implementation ARLAppDelegate
 
@@ -18,7 +19,13 @@
     ARLTableViewController *tableVC = [[ARLTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tableVC];
     
-    NSLog(@"starting");
+    ARLNoteData *test = [[ARLNoteData alloc]init];
+    NSLog(@"note body is %@", test.body);
+    
+    [test test];
+    
+    NSLog(@"note body is %@", test.body);
+    
     self.window.rootViewController = navController;
     
     self.window.backgroundColor = [UIColor whiteColor];
