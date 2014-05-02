@@ -19,6 +19,7 @@
 		9DE32DED19132F4600DBE246 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE32DD519132F4600DBE246 /* UIKit.framework */; };
 		9DE32DF519132F4600DBE246 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DE32DF319132F4600DBE246 /* InfoPlist.strings */; };
 		9DE32DF719132F4600DBE246 /* FinalProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32DF619132F4600DBE246 /* FinalProjectTests.m */; };
+		9DE32E051913314100DBE246 /* ARLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E041913314100DBE246 /* ARLTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		9DE32DF219132F4600DBE246 /* FinalProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FinalProjectTests-Info.plist"; sourceTree = "<group>"; };
 		9DE32DF419132F4600DBE246 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9DE32DF619132F4600DBE246 /* FinalProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinalProjectTests.m; sourceTree = "<group>"; };
+		9DE32E031913314100DBE246 /* ARLTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLTableViewController.h; sourceTree = "<group>"; };
+		9DE32E041913314100DBE246 /* ARLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				9DE32DE019132F4600DBE246 /* ARLAppDelegate.h */,
+				9DE32E031913314100DBE246 /* ARLTableViewController.h */,
+				9DE32E041913314100DBE246 /* ARLTableViewController.m */,
 				9DE32DE119132F4600DBE246 /* ARLAppDelegate.m */,
 				9DE32DE319132F4600DBE246 /* Images.xcassets */,
 				9DE32DD819132F4600DBE246 /* Supporting Files */,
@@ -242,6 +247,7 @@
 			files = (
 				9DE32DE219132F4600DBE246 /* ARLAppDelegate.m in Sources */,
 				9DE32DDE19132F4600DBE246 /* main.m in Sources */,
+				9DE32E051913314100DBE246 /* ARLTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

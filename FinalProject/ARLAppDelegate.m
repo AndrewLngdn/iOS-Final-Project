@@ -7,6 +7,7 @@
 //
 
 #import "ARLAppDelegate.h"
+#import "ARLTableViewController.h"
 
 @implementation ARLAppDelegate
 
@@ -14,6 +15,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    ARLTableViewController *tableVC = [[ARLTableViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tableVC];
+    
+    self.window.rootViewController = navController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
