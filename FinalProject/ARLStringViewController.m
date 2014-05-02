@@ -7,6 +7,7 @@
 //
 
 #import "ARLStringViewController.h"
+#import "ARLNoteData.h"
 
 @interface ARLStringViewController ()
 
@@ -33,12 +34,15 @@
 {
     [super viewDidLoad];
     
-    self.title = [NSString stringWithFormat:@"%d", self.row];
+    ARLNoteData *note = [[ARLNoteData alloc]init];
     
-    self.textView.text = self.string;
+    self.title = note.title;
     
-    NSLog(@"textview %@", self.textView.text);
-    NSLog(@"self.string %@", self.string);
+    
+    self.textView.text = note.body;
+    
+//    NSLog(@"textview %@", self.textView.text);
+//    NSLog(@"self.string %@", self.string);
 }
 
 
