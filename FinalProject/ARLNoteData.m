@@ -21,9 +21,20 @@
     return self;
 }
 
--(void)test
+-(void)encodeWithCoder:(NSCoder *)coder
 {
-    self.body = @"setting body";
+    [coder encodeObject: self.titleText forKey:@"titleText"];
+    [coder encodeObject: self.body forKey:@"body"];
+}
+
+-(id)initWithCoder:(NSCoder *)coder
+{
+    if (self = [self init]){
+        self.titleText = [coder decodeObjectForKey:@"titleText"];
+        self.body = [coder decodeObjectForKey:@"body"];
+    }
+    
+    return self;
 }
 
 @end

@@ -13,25 +13,22 @@
 @interface ARLTableViewController () <UITableViewDataSource, UITableViewDelegate, ARLNoteViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-
-@property (nonatomic, strong) NSMutableArray *strings;
-
 @property (nonatomic, strong) NSMutableArray *notes;
-
 @property (nonatomic) NSInteger editIndex;
 
 @end
 
 @implementation ARLTableViewController
 
+
 - (instancetype) init
 {
     if (self = [self initWithNibName:nil bundle:nil]){
-        self.strings = [NSMutableArray array];
-        self.notes = [NSMutableArray array];
+        self.notes = [self loadArray];
     }
     return self;
 }
+
 
 - (void)loadView
 {
@@ -46,18 +43,19 @@
     
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title = @"List";
+    self.title = @"Notes";
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNoteButtonPressed:)];
-    
+
     self.navigationItem.rightBarButtonItem = addButton;
 }
 
+#pragma mark - Buttons
+// make a new note view when the plus button is pressed
 - (void) addNoteButtonPressed:(UIBarButtonItem *) sender
 {
     ARLNoteViewController *inputVC = [[ARLNoteViewController alloc] init];
@@ -72,25 +70,33 @@
 
 }
 
+#pragma mark - Delegate Methods
+// if we finished creating a new note, add it to our notes array
 -(void)inputController:(ARLNoteViewController *)controller didFinishWithNote:(ARLNoteData *)note
 {
     [self.notes addObject:note];
+
+    [self saveArray:self.notes];
     
     [self.tableView reloadData];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
+// if we just finished editing a note, replace the note in the array with this one
 - (void)inputController: (ARLNoteViewController *)controller didFinishEditingNote:(ARLNoteData *)note
 {
     [self.notes replaceObjectAtIndex:self.editIndex withObject: note];
     
+    [self saveArray:self.notes];
+    
     [self.tableView reloadData];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - TableView Protocol
+// Fill the cells with the titles of the notes
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellReuseID"];
@@ -103,6 +109,7 @@
     return cell;
 }
 
+// When a user touches a row, load up the Note View controller with the note
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -118,7 +125,46 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - Data Persistence
 
+// Use nasty methods to get document directory
+- (NSString *)documentsDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return paths[0];
+}
+
+// Helper for getting datapath
+- (NSString *)noteFilePath
+{
+    return [[self documentsDirectory] stringByAppendingPathComponent:@"note-data.plist"];
+}
+
+// Loads the array from the file or creates an empty mutable array
+- (NSMutableArray *)loadArray
+{
+    NSMutableArray *array;
+    NSString *path = [self noteFilePath];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+        array = [unarchiver decodeObjectForKey:@"notes_array"];
+        [unarchiver finishDecoding];
+    } else {
+        array = [[NSMutableArray alloc] initWithCapacity:20];
+    }
+    return array;
+}
+
+// Used to save the notes array
+- (void)saveArray:(NSMutableArray *)array
+{
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:array forKey:@"notes_array"];
+    [archiver finishEncoding];
+    [data writeToFile:[self noteFilePath] atomically:YES];
+}
 
 /*
 #pragma mark - Navigation

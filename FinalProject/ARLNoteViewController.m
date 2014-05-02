@@ -50,8 +50,6 @@
 }
 
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -59,14 +57,9 @@
     
     [self.doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchDown];
         
-    [self.titleView addTarget:self
-                       action:@selector(textFieldDidFinish:)
-             forControlEvents:UIControlEventEditingDidEndOnExit];
-        
     self.titleView.returnKeyType = UIReturnKeyDone;
     
     self.textView.delegate = self;
-        
 
     if (self.editing){
         self.titleView.text = self.note.titleText;
@@ -93,18 +86,5 @@
 
 }
 
-
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-
-//    self.note.body = textView.text;
-}
-
-
-
-- (void)textFieldDidFinish:(UITextField *)textField
-{
-
-}
 
 @end

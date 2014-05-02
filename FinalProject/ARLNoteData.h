@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ARLNoteData : NSObject
+@interface ARLNoteData : NSObject <NSCoding>
 
 @property NSString *titleText;
 
 @property NSString *body;
 
--(void) test;
 
 @end
