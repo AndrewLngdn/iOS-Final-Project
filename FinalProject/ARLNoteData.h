@@ -10,7 +10,7 @@
 
 @interface ARLNoteData : NSObject
 
-@property NSString *title;
+@property NSString *titleText;
 
 @property NSString *body;
 

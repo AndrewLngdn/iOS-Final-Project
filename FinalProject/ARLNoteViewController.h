@@ -7,17 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARLNoteData.h"
 
 @class ARLNoteViewController;
 
 @protocol ARLNoteViewControllerDelegate <NSObject>
 
 -(void)inputController:(ARLNoteViewController *) controller
-     didFinishWithText: (NSString *) text;
+     didFinishWithNote: (ARLNoteData *) note;
+
+-(void)inputController:(ARLNoteViewController *) controller
+     didFinishEditingNote: (ARLNoteData *) note;
 
 @end
 
 @interface ARLNoteViewController : UIViewController <UITextViewDelegate>
+
+-(instancetype)initWithNote:(ARLNoteData *) note;
 
 @property (nonatomic, weak) id<ARLNoteViewControllerDelegate> delegate;
 

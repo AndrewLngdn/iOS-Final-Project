@@ -14,10 +14,13 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
 @property (weak, nonatomic) IBOutlet UITextField *titleView;
 
 @property (strong, nonatomic) ARLNoteData *note;
+
+@property BOOL editing;
 
 @end
 
@@ -28,52 +31,80 @@
 
     self = [self initWithNibName:@"ARLNoteViewController" bundle:nil];
     if (self) {
-//        self.note = [[ARLNoteData alloc] init];
+        self.note = [[ARLNoteData alloc] init];
         // Custom initialization
+        self.editing = false;
     }
     return self;
 }
+
+-(instancetype)initWithNote:(ARLNoteData *)note
+{
+    self = [self initWithNibName:@"ARLNoteViewController" bundle:nil];
+    if (self) {
+        self.note = note;
+        self.editing = true;
+    }
+
+    return self;
+}
+
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     
+    [self.doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchDown];
+        
     [self.titleView addTarget:self
                        action:@selector(textFieldDidFinish:)
              forControlEvents:UIControlEventEditingDidEndOnExit];
-    
+        
     self.titleView.returnKeyType = UIReturnKeyDone;
     
-    
     self.textView.delegate = self;
-    self.textView.returnKeyType = UIReturnKeyDone;
+        
+
+    if (self.editing){
+        self.titleView.text = self.note.titleText;
+        self.textView.text = self.note.body;
+    }
 }
+
+-(void)doneButtonPressed:(UIBarButtonItem *) sender
+{
+    
+    if ([self.titleView.text isEqualToString:@""]) {
+        self.titleView.text = @"Untitled";
+    }
+    
+
+    self.note.body = self.textView.text;
+    self.note.titleText = self.titleView.text;
+
+    if (self.editing){
+        [self.delegate inputController:self didFinishEditingNote: self.note];
+    } else {
+        [self.delegate inputController:self didFinishWithNote: self.note];
+    }
+
+}
+
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    NSLog(@"did end editing");
+
+//    self.note.body = textView.text;
 }
 
-
-
--(void)titleDidFinish:(UITextField *)title
-{
-    NSLog(@"in title did finish");
-}
 
 
 - (void)textFieldDidFinish:(UITextField *)textField
 {
-    if (![textField.text isEqualToString:@""]) {
-        [self.delegate inputController:self didFinishWithText:textField.text];
-    } else {
-        [[[UIAlertView alloc] initWithTitle:@"Whoops!"
-                                    message:@"You must provide a title"
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-    }
+
 }
 
 @end

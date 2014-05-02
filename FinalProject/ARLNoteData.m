@@ -15,7 +15,7 @@
 -(id)init
 {
     if (self = [super init]){
-        self.title = @"Title goes here";
+        self.titleText = @"Title goes here";
         self.body = @"Note goes here!";
     }
     return self;

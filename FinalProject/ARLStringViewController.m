@@ -36,7 +36,7 @@
     
     ARLNoteData *note = [[ARLNoteData alloc]init];
     
-    self.title = note.title;
+    self.title = note.titleText;
     
     
     self.textView.text = note.body;

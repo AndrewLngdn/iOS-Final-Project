@@ -19,13 +19,6 @@
     ARLTableViewController *tableVC = [[ARLTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tableVC];
     
-    ARLNoteData *test = [[ARLNoteData alloc]init];
-    NSLog(@"note body is %@", test.body);
-    
-    [test test];
-    
-    NSLog(@"note body is %@", test.body);
-    
     self.window.rootViewController = navController;
     
     self.window.backgroundColor = [UIColor whiteColor];

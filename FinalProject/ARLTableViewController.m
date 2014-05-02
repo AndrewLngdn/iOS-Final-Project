@@ -7,18 +7,18 @@
 //
 
 #import "ARLTableViewController.h"
-#import "ARLInputViewController.h"
-#import "ARLStringViewController.h"
 #import "ARLNoteViewController.h"
 #import "ARLNoteData.h"
 
-@interface ARLTableViewController () <UITableViewDataSource, UITableViewDelegate, ARLInputViewControllerDelegate, ARLNoteViewControllerDelegate>
+@interface ARLTableViewController () <UITableViewDataSource, UITableViewDelegate, ARLNoteViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *strings;
 
 @property (nonatomic, strong) NSMutableArray *notes;
+
+@property (nonatomic) NSInteger editIndex;
 
 @end
 
@@ -58,14 +58,6 @@
     self.navigationItem.rightBarButtonItem = addButton;
 }
 
-- (void) addButtonPressed:(UIBarButtonItem *) sender
-{
-    ARLInputViewController *inputVC = [[ARLInputViewController alloc] init];
-    inputVC.delegate = self;
-    
-    [self presentViewController:inputVC animated:YES completion:nil];
-}
-
 - (void) addNoteButtonPressed:(UIBarButtonItem *) sender
 {
     ARLNoteViewController *inputVC = [[ARLNoteViewController alloc] init];
@@ -76,21 +68,11 @@
 
 - (NSInteger)tableView :(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.strings.count;
+    return self.notes.count;
 
 }
 
-- (void)inputController: (ARLInputViewController *)controller didFinishWithText:(NSString *)text
-{
-    [self.strings addObject:text];
-    
-    [self.tableView reloadData];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-- (void)inputController: (ARLInputViewController *)controller didFinishWithNote:(ARLNoteData *)note
+-(void)inputController:(ARLNoteViewController *)controller didFinishWithNote:(ARLNoteData *)note
 {
     [self.notes addObject:note];
     
@@ -100,6 +82,15 @@
 }
 
 
+- (void)inputController: (ARLNoteViewController *)controller didFinishEditingNote:(ARLNoteData *)note
+{
+    [self.notes replaceObjectAtIndex:self.editIndex withObject: note];
+    
+    [self.tableView reloadData];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellReuseID"];
@@ -107,20 +98,22 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellReuseID"];
     }
     
-//    cell.textLabel.text = self.strings[indexPath.row];
-    cell.textLabel.text = ((ARLNoteData *)self.notes[indexPath.row]).title;
+    cell.textLabel.text = ((ARLNoteData *)self.notes[indexPath.row]).titleText;
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ARLStringViewController *detailVC = [[ARLStringViewController alloc] initWithRow:indexPath.row
-                                                                string:self.strings[indexPath.row]];
-    NSLog(@"STUFFFF!!!!");
-    NSLog(@"string : %@", self.strings[indexPath.row]);
 
     
-    [self.navigationController pushViewController:detailVC animated:YES];
+    ARLNoteViewController *noteVC = [[ARLNoteViewController alloc] initWithNote: self.notes[indexPath.row]];
+
+    self.editIndex = indexPath.row;
+    
+    noteVC.delegate = self;
+    
+    [self presentViewController:noteVC animated:YES completion:nil];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
