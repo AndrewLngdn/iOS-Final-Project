@@ -20,6 +20,8 @@
 		9DE32DF519132F4600DBE246 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DE32DF319132F4600DBE246 /* InfoPlist.strings */; };
 		9DE32DF719132F4600DBE246 /* FinalProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32DF619132F4600DBE246 /* FinalProjectTests.m */; };
 		9DE32E051913314100DBE246 /* ARLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E041913314100DBE246 /* ARLTableViewController.m */; };
+		9DE32E09191339BA00DBE246 /* ARLInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE32E07191339BA00DBE246 /* ARLInputViewController.m */; };
+		9DE32E0A191339BA00DBE246 /* ARLInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DE32E08191339BA00DBE246 /* ARLInputViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		9DE32DF619132F4600DBE246 /* FinalProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinalProjectTests.m; sourceTree = "<group>"; };
 		9DE32E031913314100DBE246 /* ARLTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLTableViewController.h; sourceTree = "<group>"; };
 		9DE32E041913314100DBE246 /* ARLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLTableViewController.m; sourceTree = "<group>"; };
+		9DE32E06191339BA00DBE246 /* ARLInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLInputViewController.h; sourceTree = "<group>"; };
+		9DE32E07191339BA00DBE246 /* ARLInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLInputViewController.m; sourceTree = "<group>"; };
+		9DE32E08191339BA00DBE246 /* ARLInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ARLInputViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +118,9 @@
 				9DE32DE019132F4600DBE246 /* ARLAppDelegate.h */,
 				9DE32E031913314100DBE246 /* ARLTableViewController.h */,
 				9DE32E041913314100DBE246 /* ARLTableViewController.m */,
+				9DE32E06191339BA00DBE246 /* ARLInputViewController.h */,
+				9DE32E07191339BA00DBE246 /* ARLInputViewController.m */,
+				9DE32E08191339BA00DBE246 /* ARLInputViewController.xib */,
 				9DE32DE119132F4600DBE246 /* ARLAppDelegate.m */,
 				9DE32DE319132F4600DBE246 /* Images.xcassets */,
 				9DE32DD819132F4600DBE246 /* Supporting Files */,
@@ -227,6 +235,7 @@
 			files = (
 				9DE32DDC19132F4600DBE246 /* InfoPlist.strings in Resources */,
 				9DE32DE419132F4600DBE246 /* Images.xcassets in Resources */,
+				9DE32E0A191339BA00DBE246 /* ARLInputViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DE32DE219132F4600DBE246 /* ARLAppDelegate.m in Sources */,
+				9DE32E09191339BA00DBE246 /* ARLInputViewController.m in Sources */,
 				9DE32DDE19132F4600DBE246 /* main.m in Sources */,
 				9DE32E051913314100DBE246 /* ARLTableViewController.m in Sources */,
 			);

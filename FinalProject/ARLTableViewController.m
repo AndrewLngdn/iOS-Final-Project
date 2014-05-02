@@ -7,8 +7,9 @@
 //
 
 #import "ARLTableViewController.h"
+#import "ARLInputViewController.h"
 
-@interface ARLTableViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ARLTableViewController () <UITableViewDataSource, UITableViewDelegate, ARLInputViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -45,13 +46,33 @@
     [super viewDidLoad];
     
     self.title = @"List";
-    // Do any additional setup after loading the view.
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed:)];
+    
+    self.navigationItem.rightBarButtonItem = addButton;
+}
+
+- (void) addButtonPressed:(UIBarButtonItem *) sender
+{
+    ARLInputViewController *inputVC = [[ARLInputViewController alloc] init];
+    inputVC.delegate = self;
+    
+    [self presentViewController:inputVC animated:YES completion:nil];
 }
 
 - (NSInteger)tableView :(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //return self.strings.count;
-    return 1;
+    return self.strings.count;
+
+}
+
+- (void)inputController: (ARLInputViewController *)controller didFinishWithText:(NSString *)text
+{
+    [self.strings addObject:text];
+    
+    [self.tableView reloadData];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,9 +82,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellReuseID"];
     }
     
-    cell.textLabel.text = @"temp";
+    cell.textLabel.text = self.strings[indexPath.row];
     return cell;
 }
+
 
 
 
