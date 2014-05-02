@@ -8,6 +8,7 @@
 
 #import "ARLTableViewController.h"
 #import "ARLInputViewController.h"
+#import "ARLStringViewController.h"
 
 @interface ARLTableViewController () <UITableViewDataSource, UITableViewDelegate, ARLInputViewControllerDelegate>
 
@@ -86,6 +87,18 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ARLStringViewController *detailVC = [[ARLStringViewController alloc] initWithRow:indexPath.row
+                                                                string:self.strings[indexPath.row]];
+    NSLog(@"STUFFFF!!!!");
+    NSLog(@"string : %@", self.strings[indexPath.row]);
+
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 
 

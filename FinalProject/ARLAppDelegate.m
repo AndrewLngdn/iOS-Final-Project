@@ -18,6 +18,7 @@
     ARLTableViewController *tableVC = [[ARLTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tableVC];
     
+    NSLog(@"starting");
     self.window.rootViewController = navController;
     
     self.window.backgroundColor = [UIColor whiteColor];
