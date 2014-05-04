@@ -19,6 +19,10 @@
 -(void)inputController:(ARLNoteViewController *) controller
      didFinishEditingNote: (ARLNoteData *) note;
 
+-(void)inputController:(ARLNoteViewController *) controller
+   didFinishWithDelete: (ARLNoteData *) note andWasEditing:(BOOL) editing;
+
+
 @end
 
 @interface ARLNoteViewController : UIViewController <UITextViewDelegate>

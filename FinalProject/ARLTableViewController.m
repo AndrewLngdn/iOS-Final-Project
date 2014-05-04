@@ -68,6 +68,8 @@
 
 - (NSInteger)tableView :(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"row count is %d", self.notes.count);
+    NSLog(@"row count is %d", [self.notes count]);
     return self.notes.count;
 }
 
@@ -96,6 +98,20 @@
     });
 }
 
+-(void) inputController:(ARLNoteViewController *)controller didFinishWithDelete: (ARLNoteData *) note andWasEditing:(BOOL)editing
+{
+    if (editing){
+        [self.notes removeObjectAtIndex:self.editIndex];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self saveArray:self.notes];
+    });
+}
+
 #pragma mark - TableView Protocol
 // Fill the cells with the titles of the notes
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -104,7 +120,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellReuseID"];
     }
-    
+
     cell.textLabel.text = ((ARLNoteData *)self.notes[indexPath.row]).titleText;
 
     return cell;

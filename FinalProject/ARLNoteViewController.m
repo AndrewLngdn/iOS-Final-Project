@@ -13,17 +13,12 @@
 
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
-
 @property (weak, nonatomic) IBOutlet UITextField *titleView;
-
 @property (strong, nonatomic) ARLNoteData *note;
-
 @property (weak, nonatomic) IBOutlet UIButton *addPhoto;
-
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property BOOL editing;
 
 @end
@@ -58,6 +53,8 @@
     [self.doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchDown];
     
     [self.addPhoto addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchDown];
+    
+    [self.deleteButton addTarget:self action:@selector(deleteNote:) forControlEvents:UIControlEventTouchDown];
         
     self.titleView.returnKeyType = UIReturnKeyDone;
     
@@ -118,6 +115,10 @@
         [self.delegate inputController:self didFinishWithNote: self.note];
     }
 
+}
+
+-(void)deleteNote:(id) sender{
+    [self.delegate inputController: self didFinishWithDelete: self.note andWasEditing: self.editing];
 }
 
 
