@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Andrew Langdon. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import "ARLNoteViewController.h"
 #import "ARLNoteData.h"
 
-@interface ARLNoteViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ARLNoteViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate,MFMailComposeViewControllerDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addPhoto;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *emailButton;
 @property BOOL editing;
 
 @end
@@ -55,6 +57,8 @@
     [self.addPhoto addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchDown];
     
     [self.deleteButton addTarget:self action:@selector(deleteNote:) forControlEvents:UIControlEventTouchDown];
+    
+    [self.emailButton addTarget:self action:@selector(emailNote:) forControlEvents:UIControlEventTouchDown];
         
     self.titleView.returnKeyType = UIReturnKeyDone;
     
@@ -72,12 +76,9 @@
 {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-    }
-    else
-    {
+    } else {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
     
@@ -117,9 +118,30 @@
 
 }
 
--(void)deleteNote:(id) sender{
+-(void)deleteNote:(id)sender
+{
     [self.delegate inputController: self didFinishWithDelete: self.note andWasEditing: self.editing];
 }
 
+-(void)emailNote:(id)sender
+{
+    MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc]init];
+    mailVC.mailComposeDelegate = self;
+    [mailVC setSubject:self.titleView.text];
+    [mailVC setMessageBody:self.textView.text isHTML:NO];
+    
+    if (self.imageView.image){
+        NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
+        [mailVC addAttachmentData:imageData mimeType:@"image/png" fileName:@"notePhoto.png"];
+    }
+
+    
+    [self presentViewController:mailVC animated:YES completion:NULL];
+}
+
+-(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

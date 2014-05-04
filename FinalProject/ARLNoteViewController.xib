@@ -9,6 +9,7 @@
                 <outlet property="addPhoto" destination="b8r-E8-FMf" id="cSx-ce-WBr"/>
                 <outlet property="deleteButton" destination="QqQ-5L-r3h" id="h8Q-MA-zjF"/>
                 <outlet property="doneButton" destination="DNS-Hl-NHE" id="CD1-JH-kYJ"/>
+                <outlet property="emailButton" destination="l3n-9L-iGm" id="5WU-du-YvJ"/>
                 <outlet property="imageView" destination="nxD-qk-Ehd" id="26G-dX-Yx9"/>
                 <outlet property="textView" destination="Ylu-l3-vm1" id="has-YS-3En"/>
                 <outlet property="title" destination="5LP-Gm-2ah" id="777-FS-Muo"/>
