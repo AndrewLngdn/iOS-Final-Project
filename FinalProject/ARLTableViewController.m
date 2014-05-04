@@ -77,7 +77,6 @@
     [self.notes addObject:note];
 
     [self saveArray:self.notes];
-    
     [self.tableView reloadData];
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -89,7 +88,6 @@
     [self.notes replaceObjectAtIndex:self.editIndex withObject: note];
     
     [self saveArray:self.notes];
-    
     [self.tableView reloadData];
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -105,7 +103,7 @@
     }
     
     cell.textLabel.text = ((ARLNoteData *)self.notes[indexPath.row]).titleText;
-    
+
     return cell;
 }
 
@@ -150,9 +148,14 @@
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
         array = [unarchiver decodeObjectForKey:@"notes_array"];
         [unarchiver finishDecoding];
+        if ([array count] == 0){
+          array = [[NSMutableArray alloc] initWithCapacity:20];
+        }
     } else {
+        // making new array
         array = [[NSMutableArray alloc] initWithCapacity:20];
     }
+
     return array;
 }
 
