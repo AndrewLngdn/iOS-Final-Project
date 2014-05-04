@@ -59,7 +59,9 @@
     [self.deleteButton addTarget:self action:@selector(deleteNote:) forControlEvents:UIControlEventTouchDown];
     
     [self.emailButton addTarget:self action:@selector(emailNote:) forControlEvents:UIControlEventTouchDown];
-        
+    
+    [self.titleView addTarget:self action:@selector(titleViewDidFinish:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    
     self.titleView.returnKeyType = UIReturnKeyDone;
     
     self.textView.delegate = self;
@@ -115,8 +117,14 @@
     } else {
         [self.delegate inputController:self didFinishWithNote: self.note];
     }
-
 }
+
+
+-(void)titleViewDidFinish:(id)sender
+{
+    [self.titleView endEditing:YES];
+}
+
 
 -(void)deleteNote:(id)sender
 {
