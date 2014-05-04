@@ -109,10 +109,8 @@
         self.titleView.text = @"Untitled";
     }
     
-
     self.note.body = self.textView.text;
     self.note.titleText = self.titleView.text;
-
 
     if (self.editing){
         [self.delegate inputController:self didFinishEditingNote: self.note];

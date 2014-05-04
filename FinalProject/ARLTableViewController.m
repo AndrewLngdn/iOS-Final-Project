@@ -75,19 +75,25 @@
 // if we finished creating a new note, add it to our notes array
 -(void)inputController:(ARLNoteViewController *)controller didFinishWithNote:(ARLNoteData *)note
 {
-    [self.notes addObject:note];
-    [self saveArray:self.notes];
-    [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.notes addObject:note];
+        [self saveArray:self.notes];
+    });
 }
 
 // if we just finished editing a note, replace the note in the array with this one
 - (void)inputController: (ARLNoteViewController *)controller didFinishEditingNote:(ARLNoteData *)note
 {
-    [self.notes replaceObjectAtIndex:self.editIndex withObject: note];
-    [self saveArray:self.notes];
-    [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.tableView reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.notes replaceObjectAtIndex:self.editIndex withObject: note];
+        [self saveArray:self.notes];
+    });
 }
 
 #pragma mark - TableView Protocol
