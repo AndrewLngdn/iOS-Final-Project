@@ -14,5 +14,7 @@
 
 @property NSString *body;
 
+@property UIImage *image;
+
 
 @end

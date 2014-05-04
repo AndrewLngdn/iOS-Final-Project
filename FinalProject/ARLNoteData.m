@@ -25,6 +25,7 @@
 {
     [coder encodeObject: self.titleText forKey:@"titleText"];
     [coder encodeObject: self.body forKey:@"body"];
+    [coder encodeObject: UIImagePNGRepresentation(self.image) forKey:@"image"];
 }
 
 -(id)initWithCoder:(NSCoder *)coder
@@ -32,6 +33,7 @@
     if (self = [self init]){
         self.titleText = [coder decodeObjectForKey:@"titleText"];
         self.body = [coder decodeObjectForKey:@"body"];
+        self.image = [UIImage imageWithData:[coder decodeObjectForKey:@"image"]];
     }
     
     return self;

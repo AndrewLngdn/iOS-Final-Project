@@ -46,12 +46,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.title = @"Notes";
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNoteButtonPressed:)];
 
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    
+    
 }
 
 #pragma mark - Buttons
@@ -67,7 +69,6 @@
 - (NSInteger)tableView :(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.notes.count;
-
 }
 
 #pragma mark - Delegate Methods
@@ -75,10 +76,8 @@
 -(void)inputController:(ARLNoteViewController *)controller didFinishWithNote:(ARLNoteData *)note
 {
     [self.notes addObject:note];
-
     [self saveArray:self.notes];
     [self.tableView reloadData];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -86,10 +85,8 @@
 - (void)inputController: (ARLNoteViewController *)controller didFinishEditingNote:(ARLNoteData *)note
 {
     [self.notes replaceObjectAtIndex:self.editIndex withObject: note];
-    
     [self saveArray:self.notes];
     [self.tableView reloadData];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -152,7 +149,6 @@
           array = [[NSMutableArray alloc] initWithCapacity:20];
         }
     } else {
-        // making new array
         array = [[NSMutableArray alloc] initWithCapacity:20];
     }
 
