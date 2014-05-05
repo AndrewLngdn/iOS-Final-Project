@@ -37,6 +37,7 @@
     return self;
 }
 
+// for editing a note
 -(instancetype)initWithNote:(ARLNoteData *)note
 {
     self = [self initWithNibName:@"ARLNoteViewController" bundle:nil];
@@ -74,6 +75,18 @@
 }
 
 
+// Hides textView's keyboard when touch occurs outside of textView
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.textView isFirstResponder] && [touch view] != self.textView) {
+        [self.textView resignFirstResponder];
+    }
+    [super touchesBegan:touches withEvent:event];
+}
+
+
+// Picture picker logic. Unfortunately I can't test it on my actual device
 -(void) takePicture:(id) sender
 {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -101,7 +114,8 @@
 }
 
 
-
+// Save off our text when the done button is pressed. Picture saving is performed
+// when the picture disappears.
 -(void)doneButtonPressed:(UIBarButtonItem *) sender
 {
     
@@ -130,6 +144,8 @@
 {
     [self.delegate inputController: self didFinishWithDelete: self.note andWasEditing: self.editing];
 }
+
+
 
 -(void)emailNote:(id)sender
 {

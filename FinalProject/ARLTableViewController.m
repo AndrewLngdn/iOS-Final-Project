@@ -49,11 +49,17 @@
     self.title = @"Notes";
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNoteButtonPressed:)];
+    
+    if (self.notes.count == 0){
+        UIAlertView *noNotes = [[UIAlertView alloc] initWithTitle:@"Hey!"
+                                                          message:@"You don't have any notes yet! Use the + button in the upper right corner to make a new note."
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [noNotes show];
+    }
 
     self.navigationItem.rightBarButtonItem = addButton;
-    
-    
-    
 }
 
 #pragma mark - Buttons
